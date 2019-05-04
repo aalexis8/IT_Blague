@@ -2,14 +2,55 @@ import React from "react"
 import { Link } from "gatsby"
 import styles from "./header.module.scss"
 
+// HeaderLink component
+const HeaderLink = props => (
+  <Link className={styles.link} to={props.to}>
+    {props.text}
+  </Link>
+)
+
+// HomeButton component
+const HomeButton = props => (
+  <Link to={props.to}>
+    <div className={styles.button}>{props.text}</div>
+  </Link>
+)
+
+// Social Button component
+const SocialButton = props => {
+  let style = ""
+  let url = ""
+
+  if (props.site === "twitter") {
+    style = styles.buttonTwitter
+    url = "https://twitter.com/" + props.username
+  } else if (props.site === "linkedin") {
+    style = styles.buttonLinkedin
+    url = "https://www.linkedin.com/in/" + props.username
+  } else if (props.site === "github") {
+    style = styles.buttonGithub
+    url = "https://www.github.com/" + props.username
+  }
+
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer">
+      <div className={style}>{props.children}&nbsp;</div>
+    </a>
+  )
+}
+
 export default () => (
   <header className={styles.container}>
     <div className={styles.row}>
-      <Link to="/">The IT Blog</Link>
+      <HomeButton to="/" text="The IT Blog" />
+      <SocialButton site="github" username="aalexis8" />
+      <SocialButton site="linkedin" username="aalexis1" />
+      <SocialButton site="twitter" usename="aalexis8" />
     </div>
 
     <div className={styles.row}>
-      <Link to="/">BLOG</Link> | <Link to="/about">ARTICLES</Link>
+      <HeaderLink to="/" text="ARTICLES" /> |{" "}
+      <HeaderLink to="/about" text="ABOUT" />
     </div>
   </header>
 )
