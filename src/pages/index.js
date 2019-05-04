@@ -1,9 +1,9 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import Title from "../components/title"
 
-export default () => (
+export default ({ data }) => (
   <Layout>
     <Title text="Welcome" />
     <div>
@@ -15,5 +15,34 @@ export default () => (
       accusantium, ipsam dolor fugit sapiente placeat enim quaerat aperiam
       nesciunt ipsa veritatis praesentium dolorum.
     </p>
+    <div>
+      {data.allMarkdownRemark.edges.map(({ node }) => (
+        <article>
+          <div>
+            <strong>{node.frontmatter.title}</strong>
+          </div>
+          <div>{node.excerpt}</div>
+        </article>
+      ))}
+    </div>
   </Layout>
 )
+
+export const query = graphql`
+  query {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            image
+            date(formatString: "MMMM YYYY")
+          }
+          excerpt
+        }
+      }
+    }
+  }
+`
