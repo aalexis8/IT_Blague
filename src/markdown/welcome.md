@@ -1,8 +1,8 @@
 ---
-title: "Welcome to IT Blague blog!"
-date: "2019-05-04"
-image: "https://source.unsplash.com/150x150/?welcome"
-keywords: "developers"
+title: 'Welcome to our Gatsby Blague!'
+date: '2019-03-02'
+image: 'https://source.unsplash.com/150x150/?welcome'
+keywords: 'developers'
 ---
 
 #Hi there!
